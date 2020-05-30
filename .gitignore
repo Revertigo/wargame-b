@@ -33,5 +33,7 @@ solution*
 *.exe
 *.out
 *.app
-demo
 test
+.idea/
+cmake-build-debug/
+CMakeLists.txt
