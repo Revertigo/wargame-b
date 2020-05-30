@@ -3,3 +3,14 @@
 //
 
 #include "Sniper.hpp"
+
+namespace WarGame {
+
+    void Sniper::move(WarGame::MoveDIR dir, vector<vector<Soldier *>> &board) {
+
+    }
+
+    void Sniper::act(vector<vector<Soldier *>> &board) {
+
+    }
+}

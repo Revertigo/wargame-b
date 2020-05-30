@@ -8,8 +8,15 @@
 #include "Soldier.hpp"
 namespace WarGame {
     class SniperCommander: public Soldier {
+        const int DMG = 100;
+        const int HP = 120;
+
+    protected:
+        void act(vector<vector<Soldier *>> &board) override;
+
     public:
-        SniperCommander(int player){}
+        SniperCommander(int player): Soldier(player, HP){}
+        void move(MoveDIR dir, vector<vector<Soldier *>> &board) override;
     };
 }
 

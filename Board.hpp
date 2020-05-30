@@ -7,21 +7,20 @@
  * @author Erel Segal-Halevi
  * @since  2020-05
  */
+#ifndef WARGAME_B_BOARD_HPP
+#define WARGAME_B_BOARD_HPP
 
 #include <string>
 #include <vector>
 #include <stdexcept>
 #include "Soldier.hpp"
 
-
 namespace WarGame {
-
     class Board {
     private:
         std::vector<std::vector<Soldier*>> board;
     public:
-        enum MoveDIR { Up, Down, Right, Left };
-
+        //enum MoveDIR { Up, Down, Right, Left };
         Board(uint numRows, uint numCols) :
                 board(numRows, std::vector<Soldier*>(numCols, nullptr)) {}
 
@@ -42,10 +41,13 @@ namespace WarGame {
         // IMPLEMENTATION HINT: Do not write "if" conditions that depend on the type of soldier!
         // Your code should be generic. All handling of different types of soldiers
         //      must be handled by polymorphism.
-        void move(uint player_number, std::pair<int,int> source, MoveDIR direction);
+        void move(uint player_number, std::pair<int,int> source, WarGame::MoveDIR direction);
 
         // returns true iff the board contains one or more soldiers of the given player.
         bool has_soldiers(uint player_number) const;
+
+        //find the closet location of the enemy soldier
+        pair<int,int> find_closet_enemy(int player, pair<int, int> loc);
 
         ~Board()
         {
@@ -54,3 +56,5 @@ namespace WarGame {
     };
 
 }
+
+#endif //WARGAME_B_BOARD_HPP

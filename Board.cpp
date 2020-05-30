@@ -6,15 +6,14 @@
 
 namespace WarGame {
     Soldier *&Board::operator[](std::pair<int, int> location) {
-        Soldier * s = nullptr;
-        return s;
+        return board[location.first][location.second];
     }
 
     Soldier *Board::operator[](std::pair<int, int> location) const {
-        return nullptr;
+        return board[location.first][location.second];
     }
 
-    void Board::move(uint player_number, std::pair<int,int> source, MoveDIR direction)
+    void Board::move(uint player_number, std::pair<int,int> source, WarGame::MoveDIR direction)
     {
         return;
     }

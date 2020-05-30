@@ -9,9 +9,16 @@
 
 namespace WarGame {
     class FootCommander : public Soldier {
+        const int DMG = 20;
+        const int HP = 150;
+
+    protected:
+        void act(vector<vector<Soldier *>> &board) override;
 
     public:
-        FootCommander(int player){}
+        FootCommander(int player): Soldier(player, HP){}
+
+        void move(MoveDIR dir, vector<vector<Soldier *>> &board) override;
     };
 }
 

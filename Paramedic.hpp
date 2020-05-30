@@ -9,8 +9,14 @@
 
 namespace WarGame {
     class Paramedic : public Soldier{
+        const int HEAL = 200;//Full HP TODO:Fix for heal full not depending on the class
+        const int HP = 100;
+    protected:
+        void act(vector<vector<Soldier *>> &board) override;
+
     public:
-        Paramedic(int player){}
+        Paramedic(int player): Soldier(player, HP){}
+        void move(MoveDIR dir, vector<vector<Soldier *>> &board) override;
     };
 }
 
