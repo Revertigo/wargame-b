@@ -4,6 +4,7 @@
 
 #include <cmath>
 #include "Soldier.hpp"
+#include <stdexcept>
 
 namespace WarGame {
 
@@ -15,10 +16,10 @@ namespace WarGame {
                     pow(y2 - y1, 2) * 1.0);
     }
 
-    pair<int,int> Soldier::find_closet_enemy(vector<vector<Soldier*>> & board)
+    pair<int,int> Soldier::find_closest_enemy(vector<vector<Soldier*>> & board)
     {
-        double min_distance = numeric_limits<double>::max();
-        pair<int,int> result(-1,-1);//Sign it as unassigned
+        double min_distance = numeric_limits<double>::max();//Assign MAX value
+        pair<int,int> result(-1,-1);//mark it as unassigned
 
         for (int i = 0; i < board.size(); i++) {
             for (int j = 0; j < board[i].size(); j++)
@@ -34,5 +35,58 @@ namespace WarGame {
         }
 
         return result;
+    }
+
+    pair<int,int> Soldier::find_strongest_enemy(vector<vector<Soldier*>> & board)
+    {
+        double max_hp = 0;
+        pair<int,int> result(-1,-1);//mark it as unassigned
+
+        for (int i = 0; i < board.size(); i++) {
+            for (int j = 0; j < board[i].size(); j++)
+                if(board[i][j] != nullptr && board[i][j]->getPlayer() != _player)
+                {
+                    double hp = board[i][j]->getHp();
+                    if(hp > max_hp)
+                    {
+                        max_hp = hp;
+                        result = board[i][j]->getLoc();
+                    }
+                }
+        }
+
+        return result;
+    }
+
+    void Soldier::move(MoveDIR dir, vector<vector<Soldier *>> &board) {
+        switch (dir)
+        {
+            case Up:
+            {
+                _loc.first +=1;//first = x, second = y
+                break;
+            }
+            case Down:
+            {
+                _loc.first -=1;
+                break;
+            }
+            case Right:
+            {
+                _loc.second +=1;
+                break;
+            }
+            case Left:
+            {
+                _loc.second -=1;
+                break;
+            }
+            default:
+            {
+                throw invalid_argument("Unknown direction");
+            }
+        }
+
+        act(board);
     }
 }

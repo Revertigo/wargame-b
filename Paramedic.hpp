@@ -16,7 +16,6 @@ namespace WarGame {
 
     public:
         Paramedic(int player): Soldier(player, HP){}
-        void move(MoveDIR dir, vector<vector<Soldier *>> &board) override;
     };
 }
 

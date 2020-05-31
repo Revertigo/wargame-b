@@ -16,8 +16,6 @@ namespace WarGame {
 
     public:
         FootSoldier(int player): Soldier(player, HP){}
-        void move(MoveDIR dir, vector<vector<Soldier*>> & board) override;
-
     };
 }
 

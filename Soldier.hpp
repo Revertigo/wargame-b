@@ -24,11 +24,13 @@ namespace WarGame {
         Soldier(int player, int hp): _player(player), _hp(hp){};
         virtual void act(vector<vector<Soldier*>> & board) = 0;
 
-        pair<int,int> find_closet_enemy(vector<vector<Soldier*>> & board);
+        pair<int,int> find_closest_enemy(vector<vector<Soldier*>> & board);
+        pair<int,int> find_strongest_enemy(vector<vector<Soldier*>> & board);
     public:
-        virtual void move(MoveDIR dir, vector<vector<Soldier*>> & board) = 0;
+        virtual void move(MoveDIR dir, vector<vector<Soldier*>> & board);
 
         int getPlayer() const {return _player;}
+        int getHp() const {return _hp;}
         const pair<int,int> &getLoc() const {return _loc;}
         void damage(int amount){_hp -= amount;}
     };
