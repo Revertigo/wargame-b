@@ -9,13 +9,12 @@
 
 namespace WarGame {
     class Sniper : public Soldier{
-        const int DMG = 50;
-        const int HP = 100;
-    protected:
-        void act(vector<vector<Soldier *>> &board) override;
+        static const int DMG = 50;
+        static const int HP = 100;
 
     public:
-        Sniper(int player):Soldier(player, HP){}
+        Sniper(int player):Soldier(player, HP, "S "){}
+        void act(vector<vector<Soldier *>> &board) override;
     };
 }
 

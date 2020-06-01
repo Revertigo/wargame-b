@@ -9,13 +9,12 @@
 
 namespace WarGame {
     class Paramedic : public Soldier{
-        const int HEAL = 200;//Full HP TODO:Fix for heal full not depending on the class
-        const int HP = 100;
-    protected:
-        void act(vector<vector<Soldier *>> &board) override;
+        static const int HEAL = 200;//Full HP TODO:Fix for heal full not depending on the class
+        static const int HP = 100;
 
     public:
-        Paramedic(int player): Soldier(player, HP){}
+        Paramedic(int player): Soldier(player, HP, "P "){}
+        void act(vector<vector<Soldier *>> &board) override;
     };
 }
 

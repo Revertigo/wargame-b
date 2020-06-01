@@ -9,8 +9,4 @@ namespace WarGame{
     void SniperCommander::act(vector<vector<Soldier *>> &board) {
 
     }
-
-    void SniperCommander::move(MoveDIR dir, vector<vector<Soldier *>> &board) {
-
-    }
 }

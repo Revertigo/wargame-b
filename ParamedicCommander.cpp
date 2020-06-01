@@ -9,9 +9,5 @@ namespace WarGame{
     void ParamedicCommander::act(vector<vector<Soldier *>> &board) {
 
     }
-
-    void ParamedicCommander::move(MoveDIR dir, vector<vector<Soldier *>> &board) {
-
-    }
 }
 
