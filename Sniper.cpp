@@ -5,8 +5,8 @@
 #include "Sniper.hpp"
 
 namespace WarGame {
-    void Sniper::act(vector<vector<Soldier *>> &board) {
+    void Sniper::act(pair<int, int> src, vector<vector<Soldier *>> &board) {
         pair<int, int> target = find_strongest_enemy(board);
-        board[target.first][target.second]->damage(DMG);//damage the target player's soldier
+        board[target.first][target.second]->damage(DMG, target, board);//damage the target player's soldier
     }
 }

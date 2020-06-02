@@ -14,7 +14,7 @@ namespace WarGame {
 
     public:
         Sniper(int player):Soldier(player, HP, "S "){}
-        void act(vector<vector<Soldier *>> &board) override;
+        void act(pair<int, int> src, vector<vector<Soldier *>> &board) override;
     };
 }
 
