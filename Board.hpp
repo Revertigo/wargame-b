@@ -21,7 +21,6 @@ namespace WarGame {
         std::vector<std::vector<Soldier*>> board;
         int counter_soldiers[2];//1 cell for each player
 
-        void print_board(void);
     public:
         //enum MoveDIR { Up, Down, Right, Left };
         Board(uint numRows, uint numCols) :
@@ -47,10 +46,9 @@ namespace WarGame {
         void move(uint player_number, std::pair<int,int> source, WarGame::MoveDIR direction);
 
         // returns true iff the board contains one or more soldiers of the given player.
-        bool has_soldiers(uint player_number) const;
+        bool has_soldiers(uint player_number);
 
-        //find the closet location of the enemy soldier
-        pair<int,int> find_closet_enemy(int player, pair<int, int> loc);
+        void print_board(void);
 
         ~Board()
         {
