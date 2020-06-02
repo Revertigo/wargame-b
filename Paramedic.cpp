@@ -6,7 +6,7 @@
 
 namespace WarGame{
 
-    void Paramedic::act(vector<vector<Soldier *>> &board) {
+    void Paramedic::act(pair<int, int> src, vector<vector<Soldier *>> &board) {
 
     }
 }

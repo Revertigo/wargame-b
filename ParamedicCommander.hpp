@@ -12,7 +12,7 @@ namespace WarGame {
         static const int HP = 200;
 
     protected:
-        void act(vector<vector<Soldier *>> &board) override;
+        void act(pair<int, int> src, vector<vector<Soldier *>> &board) override;
 
     public:
         ParamedicCommander(int player) : Soldier(player, HP, "PC") {}

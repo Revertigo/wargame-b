@@ -14,7 +14,7 @@ namespace WarGame {
 
     public:
         Paramedic(int player): Soldier(player, HP, "P "){}
-        void act(vector<vector<Soldier *>> &board) override;
+        void act(pair<int, int> src, vector<vector<Soldier *>> &board) override;
     };
 }
 
