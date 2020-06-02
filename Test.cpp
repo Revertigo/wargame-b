@@ -52,13 +52,14 @@ TEST_CASE("Check FootSoldier behavior"){
 TEST_CASE("Check FootCommander behavior"){
     Board b(BOARD_SIZE,BOARD_SIZE);
 
-    b[{1,1}] = new FootSoldier(1);
+    b[{1,1}] = new FootCommander(1);
     b[{2,2}] = new FootCommander(2);
     b[{3,3}] = new FootSoldier(2);
 
     int move = MoveDIR::Down;//Starting move is Down
     int x_loc_ft2 = 2;
     int x_loc_f1 = 1;
+
     //player's 1 FootCommander should be dead after exactly 5 rounds
     for(int i = 0; i < BOARD_SIZE; i++)
     {
