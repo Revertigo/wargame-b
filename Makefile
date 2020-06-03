@@ -1,20 +1,20 @@
 #!make -f
 
 CXX=clang++-9 
-CXXFLAGS=-std=c++2a
+CXXFLAGS=-std=c++2a -Wno-potentially-evaluated-expression
 
-HEADERS := $(wildcard *.h*)
-STUDENT_SOURCES := $(filter-out $(TEACHER_SOURCES), $(wildcard *.cpp))
+HEADERS := Board.hpp Soldier.hpp $(wildcard *.h*)
+STUDENT_SOURCES := $(filter-out $(wildcard Test*.cpp), $(filter-out $(wildcard Demo.cpp), $(wildcard *.cpp)))
 STUDENT_OBJECTS := $(subst .cpp,.o,$(STUDENT_SOURCES))
 
 run: test
 	./$^
 
-test: TestRunner.o Test.o $(STUDENT_OBJECTS)
+test: TestRunner.o Test_amichai.o Test_oriane_yirat.o Test.o $(STUDENT_OBJECTS)
 	$(CXX) $(CXXFLAGS) $^ -o test
 
 %.o: %.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) --compile $< -o $@
 
 clean:
-	rm -f *.o demo test
+	rm -f *.o test
