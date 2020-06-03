@@ -8,7 +8,6 @@
 #include "Soldier.hpp"
 namespace WarGame {
     class ParamedicCommander: public Soldier {
-        static const int HEAL = 200;//TODO:Fix for heal full not depending on the class
         static const int HP = 200;
 
     protected:

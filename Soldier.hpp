@@ -19,13 +19,14 @@ using namespace std;
 namespace WarGame {
     class Soldier{
         double distance(int x1, int y1, int x2, int y2);
-
+        const int _INITIAL_HP;
     protected:
-        int _player;//1 or 2
+        //1 or 2
+        int _player;
         int _hp;
         string _name;
 
-        Soldier(int player, int hp, string name): _player(player), _hp(hp), _name(name){};
+        Soldier(int player, int hp, string name): _player(player), _hp(hp), _name(name), _INITIAL_HP(hp){};
 
         pair<int,int> find_closest_enemy(pair<int, int> src, vector<vector<Soldier*>> & board);
         pair<int,int> find_strongest_enemy(vector<vector<Soldier*>> & board);
@@ -33,7 +34,7 @@ namespace WarGame {
         virtual void act(pair<int, int> src, vector<vector<Soldier*>> & board) = 0;
 
         template <class T>
-        void actuate_subordinate(vector<vector<Soldier *>> &board) {
+        void actuate_subordinates(vector<vector<Soldier *>> &board) {
 
             for(int i = 0; i < board.size(); i++) {
                 for (int j = 0; j < board[i].size(); j++) {
@@ -49,11 +50,11 @@ namespace WarGame {
     public:
         virtual ~Soldier(){}//We want to call delete of the correct object
         void move(pair<int, int> src, MoveDIR dir, vector<vector<Soldier*>> & board);
-
         int getPlayer() const {return _player;}
         int getHp() const {return _hp;}
         const string getName() const {return _name;}
         void damage(const int amount, pair<int,int> loc, vector<vector<Soldier *>> &board);
+        void heal(void){_hp = _INITIAL_HP;}
 
         // Move assignment operator
 //        Soldier & operator=(Soldier & other)

@@ -13,7 +13,7 @@ namespace WarGame {
         static const int DMG = 20;
         static const int HP = 150;
 
-        //void actuate_subordinate(vector<vector<Soldier *>> &board);
+        //void actuate_subordinates(vector<vector<Soldier *>> &board);
     protected:
         void act(pair<int, int> src, vector<vector<Soldier *>> &board) override;
 

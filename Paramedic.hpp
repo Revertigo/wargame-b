@@ -6,12 +6,13 @@
 #define WARGAME_A_PARAMEDIC_HPP
 
 #include "Soldier.hpp"
-
+#include "ParamedicCommander.hpp"
 namespace WarGame {
     class Paramedic : public Soldier{
-        static const int HEAL = 200;//Full HP TODO:Fix for heal full not depending on the class
+        friend class ParamedicCommander;
         static const int HP = 100;
 
+        static void heal_teammates(pair<int, int> src, vector<vector<Soldier *>> &board);
     public:
         Paramedic(int player): Soldier(player, HP, "P "){}
         void act(pair<int, int> src, vector<vector<Soldier *>> &board) override;
