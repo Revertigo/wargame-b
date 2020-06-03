@@ -3,7 +3,6 @@
 //
 #include "doctest.h"
 #include "Board.hpp"
-#include "MoveDIR.hpp"
 #include "FootSoldier.hpp"
 #include "FootCommander.hpp"
 #include "Sniper.hpp"
@@ -11,7 +10,6 @@
 #include "Paramedic.hpp"
 #include "ParamedicCommander.hpp"
 
-using namespace std;
 using namespace WarGame;
 
 #define BOARD_SIZE 5
@@ -25,25 +23,23 @@ TEST_CASE("Check FootSoldier behavior"){
     b[{1,1}] = new FootSoldier(1);
     b[{2,2}] = new FootSoldier(2);
 
-    b.print_board();
-
     CHECK(b.has_soldiers(1) == true);
     CHECK(b.has_soldiers(2) == true);
 
-    int move = MoveDIR::Up;//First move UP
+    int move = Board::MoveDIR::Up;//First move UP
     int x_loc_f1 = 1;
     int x_loc_f2 = 2;
     for(int i = 0; i < 9; i++)
     {
         //Move UP, then DOWN, then UP...
-        CHECK_NOTHROW(b.move(1, pair(x_loc_f1, 1), (MoveDIR)move));
-        CHECK_NOTHROW(b.move(2, pair(x_loc_f2, 2), (MoveDIR)move));
+        CHECK_NOTHROW(b.move(1, pair(x_loc_f1, 1), (Board::MoveDIR)move));
+        CHECK_NOTHROW(b.move(2, pair(x_loc_f2, 2), (Board::MoveDIR)move));
         move = 1 - move;
         x_loc_f1 = 3 - x_loc_f1;
         x_loc_f2 = 5 - x_loc_f2;
     }
-    CHECK_NOTHROW(b.move(1, pair(x_loc_f1, 1), (MoveDIR)move));
-    CHECK_THROWS(b.move(2, pair(x_loc_f2, 2), (MoveDIR)move));//f2 should be dead now
+    CHECK_NOTHROW(b.move(1, pair(x_loc_f1, 1), (Board::MoveDIR)move));
+    CHECK_THROWS(b.move(2, pair(x_loc_f2, 2), (Board::MoveDIR)move));//f2 should be dead now
 
     CHECK(b.has_soldiers(2) == false);//Player 1 has won ! wonder why
     CHECK(b.has_soldiers(1) == true);
@@ -56,7 +52,7 @@ TEST_CASE("Check FootCommander behavior"){
     b[{2,2}] = new FootCommander(2);
     b[{3,3}] = new FootSoldier(2);
 
-    int move = MoveDIR::Down;//Starting move is Down
+    int move = Board::MoveDIR::Down;//Starting move is Down
     int x_loc_ft2 = 2;
     int x_loc_f1 = 1;
 
@@ -64,8 +60,8 @@ TEST_CASE("Check FootCommander behavior"){
     for(int i = 0; i < BOARD_SIZE; i++)
     {
         //Move DOWN, then UP, then DOWN...
-        CHECK_NOTHROW(b.move(1, pair(x_loc_f1, 1), (MoveDIR)move));//Moves FootSoldier
-        CHECK_NOTHROW(b.move(2, pair(x_loc_ft2, 2), (MoveDIR)move));//Moves FootCommander
+        CHECK_NOTHROW(b.move(1, pair(x_loc_f1, 1), (Board::MoveDIR)move));//Moves FootSoldier
+        CHECK_NOTHROW(b.move(2, pair(x_loc_ft2, 2), (Board::MoveDIR)move));//Moves FootCommander
         move = 1 - move;
         x_loc_f1 = 1 - x_loc_f1;
         x_loc_ft2 = 3 - x_loc_ft2;
@@ -86,7 +82,7 @@ TEST_CASE("Check Sniper behavior"){
     CHECK(b.has_soldiers(1) == true);
     CHECK(b.has_soldiers(2) == true);
 
-    int move = MoveDIR::Left; //First move Left
+    int move = Board::MoveDIR::Left; //First move Left
     int y_loc_s1 = 2;
     int y_loc_s2 = 3;
     //Player 1 should win after 4 moves with sniper
@@ -94,18 +90,18 @@ TEST_CASE("Check Sniper behavior"){
     {
         CHECK(b.has_soldiers(2) == true);
         CHECK(b.has_soldiers(1) == true);
-        CHECK_NOTHROW(b.move(1, pair(2, y_loc_s1), (MoveDIR)move));
-        CHECK_NOTHROW(b.move(2, pair(3, y_loc_s2), (MoveDIR)move));
+        CHECK_NOTHROW(b.move(1, pair(2, y_loc_s1), (Board::MoveDIR)move));
+        CHECK_NOTHROW(b.move(2, pair(3, y_loc_s2), (Board::MoveDIR)move));
         move = 5 - move;
         y_loc_s1 = 3 - y_loc_s1;
         y_loc_s2 = 5 - y_loc_s2;
     }
 
-    CHECK_NOTHROW(b.move(1, pair(2, y_loc_s1), (MoveDIR)move));
+    CHECK_NOTHROW(b.move(1, pair(2, y_loc_s1), (Board::MoveDIR)move));
     move = 5 - move;
     y_loc_s1 = 3 - y_loc_s1;
     CHECK(b.has_soldiers(2) == true);
-    CHECK_NOTHROW(b.move(1, pair(2, y_loc_s1), (MoveDIR)move));
+    CHECK_NOTHROW(b.move(1, pair(2, y_loc_s1), (Board::MoveDIR)move));
 
     CHECK(b.has_soldiers(2) == false);//Player 1 should win
     CHECK(b.has_soldiers(1) == true);
@@ -122,21 +118,21 @@ TEST_CASE("Check SniperCommander behavior"){
     CHECK(b.has_soldiers(1) == true);
     CHECK(b.has_soldiers(2) == true);
 
-    int move = MoveDIR::Left; //First move Left
+    int move = Board::MoveDIR::Left; //First move Left
     int y_loc_s1 = 2;
     int y_loc_s2 = 3;
     //Player 1 should win after 2 moves with sniper
 
-    CHECK_NOTHROW(b.move(1, pair(2, y_loc_s1), (MoveDIR)move));
-    CHECK_NOTHROW(b.move(2, pair(3, y_loc_s2), (MoveDIR)move));
+    CHECK_NOTHROW(b.move(1, pair(2, y_loc_s1), (Board::MoveDIR)move));
+    CHECK_NOTHROW(b.move(2, pair(3, y_loc_s2), (Board::MoveDIR)move));
     move = 5 - move;
     y_loc_s1 = 3 - y_loc_s1;
     y_loc_s2 = 5 - y_loc_s2;
 
     CHECK(b.has_soldiers(2) == true);
-    CHECK_NOTHROW(b.move(1, pair(2, y_loc_s1), (MoveDIR)move));
-    CHECK_THROWS(b.move(2, pair(3, y_loc_s2), (MoveDIR)move));//The SC2 should be dead
-    CHECK_THROWS(b.move(2, pair(4, 4), (MoveDIR)move));//The FS should be dead
+    CHECK_NOTHROW(b.move(1, pair(2, y_loc_s1), (Board::MoveDIR)move));
+    CHECK_THROWS(b.move(2, pair(3, y_loc_s2), (Board::MoveDIR)move));//The SC2 should be dead
+    CHECK_THROWS(b.move(2, pair(4, 4), (Board::MoveDIR)move));//The FS should be dead
 
     y_loc_s1 = 3 - y_loc_s1;
     //Validate player 1 soldiers are still alive
@@ -159,7 +155,7 @@ TEST_CASE("Check Paramdedic behavior"){
     CHECK(b.has_soldiers(1) == true);
     CHECK(b.has_soldiers(2) == true);
 
-    int move = MoveDIR::Left; //First move Left
+    int move = Board::MoveDIR::Left; //First move Left
     int y_loc_p1 = 2;
     int y_loc_p2 = 3;
     int y_loc_s1 = 1;
@@ -171,11 +167,11 @@ TEST_CASE("Check Paramdedic behavior"){
     {
         CHECK(b.has_soldiers(2) == true);
         CHECK(b.has_soldiers(1) == true);
-        CHECK_NOTHROW(b.move(1, pair(3, y_loc_f1), (MoveDIR)move));//Always target adversary paramedic
-        CHECK_NOTHROW(b.move(1, pair(1, y_loc_s1), (MoveDIR)move));
-        CHECK_NOTHROW(b.move(2, pair(4, y_loc_s2), (MoveDIR)move));
-        CHECK_NOTHROW(b.move(1, pair(2, y_loc_p1), (MoveDIR)move));
-        CHECK_NOTHROW(b.move(2, pair(3, y_loc_p2), (MoveDIR)move));
+        CHECK_NOTHROW(b.move(1, pair(3, y_loc_f1), (Board::MoveDIR)move));//Always target adversary paramedic
+        CHECK_NOTHROW(b.move(1, pair(1, y_loc_s1), (Board::MoveDIR)move));
+        CHECK_NOTHROW(b.move(2, pair(4, y_loc_s2), (Board::MoveDIR)move));
+        CHECK_NOTHROW(b.move(1, pair(2, y_loc_p1), (Board::MoveDIR)move));
+        CHECK_NOTHROW(b.move(2, pair(3, y_loc_p2), (Board::MoveDIR)move));
 
         move = 5 - move;
         y_loc_p1 = 3 - y_loc_p1;
@@ -187,19 +183,19 @@ TEST_CASE("Check Paramdedic behavior"){
 
     CHECK(b.has_soldiers(2) == true);
     CHECK(b.has_soldiers(1) == true);
-    CHECK_NOTHROW(b.move(1, pair(3, y_loc_f1), (MoveDIR)move));//Always target adversary paramedic
-    CHECK_NOTHROW(b.move(1, pair(1, y_loc_s1), (MoveDIR)move));
-    CHECK_NOTHROW(b.move(2, pair(4, y_loc_s2), (MoveDIR)move));
-    CHECK_NOTHROW(b.move(1, pair(2, y_loc_p1), (MoveDIR)move));
-    CHECK_THROWS(b.move(2, pair(3, y_loc_p2), (MoveDIR)move));//Check p2 is dead
+    CHECK_NOTHROW(b.move(1, pair(3, y_loc_f1), (Board::MoveDIR)move));//Always target adversary paramedic
+    CHECK_NOTHROW(b.move(1, pair(1, y_loc_s1), (Board::MoveDIR)move));
+    CHECK_NOTHROW(b.move(2, pair(4, y_loc_s2), (Board::MoveDIR)move));
+    CHECK_NOTHROW(b.move(1, pair(2, y_loc_p1), (Board::MoveDIR)move));
+    CHECK_THROWS(b.move(2, pair(3, y_loc_p2), (Board::MoveDIR)move));//Check p2 is dead
     CHECK(b.has_soldiers(2) == true);//Check p2 still has soldiers(s2)
 
     move = 5 - move;
     y_loc_s1 = 1 - y_loc_s1;
     y_loc_s2 = 7 - y_loc_s2;
 
-    CHECK_NOTHROW(b.move(1, pair(1, y_loc_s1), (MoveDIR)move));//Should kill s2(he now has 50 HP)
-    CHECK_THROWS(b.move(2, pair(4, y_loc_s2), (MoveDIR)move));//Should be dead
+    CHECK_NOTHROW(b.move(1, pair(1, y_loc_s1), (Board::MoveDIR)move));//Should kill s2(he now has 50 HP)
+    CHECK_THROWS(b.move(2, pair(4, y_loc_s2), (Board::MoveDIR)move));//Should be dead
 
     CHECK(b.has_soldiers(2) == false);//Player 1 should win
     CHECK(b.has_soldiers(1) == true);
@@ -217,7 +213,7 @@ TEST_CASE("Check ParamdedicCommander behavior"){
     CHECK(b.has_soldiers(1) == true);
     CHECK(b.has_soldiers(2) == true);
 
-    int move = MoveDIR::Left; //First move Left
+    int move = Board::MoveDIR::Left; //First move Left
     int y_loc_p2 = 3;
     int y_loc_fc1 = 1;
     int y_loc_s2 = 4;
@@ -232,10 +228,10 @@ TEST_CASE("Check ParamdedicCommander behavior"){
         CHECK(b.has_soldiers(2) == true);
         CHECK(b.has_soldiers(1) == true);
 
-        CHECK_NOTHROW(b.move(1, pair(1, y_loc_fc1), (MoveDIR)move));//Always target adversary paramedic
-        CHECK_NOTHROW(b.move(2, pair(4, y_loc_s2), (MoveDIR)move));
-        CHECK_NOTHROW(b.move(2, pair(3, y_loc_p2), (MoveDIR)move));
-        CHECK_NOTHROW(b.move(1, pair(1, y_loc_pc1), (MoveDIR)move));
+        CHECK_NOTHROW(b.move(1, pair(1, y_loc_fc1), (Board::MoveDIR)move));//Always target adversary paramedic
+        CHECK_NOTHROW(b.move(2, pair(4, y_loc_s2), (Board::MoveDIR)move));
+        CHECK_NOTHROW(b.move(2, pair(3, y_loc_p2), (Board::MoveDIR)move));
+        CHECK_NOTHROW(b.move(1, pair(1, y_loc_pc1), (Board::MoveDIR)move));
 
         move = 5 - move;
         y_loc_p2 = 5 - y_loc_p2;
@@ -246,10 +242,10 @@ TEST_CASE("Check ParamdedicCommander behavior"){
 
     CHECK(b.has_soldiers(2) == true);
     CHECK(b.has_soldiers(1) == true);
-    CHECK_NOTHROW(b.move(1, pair(1, y_loc_fc1), (MoveDIR)move));//Always target adversary paramedic
-    CHECK_NOTHROW(b.move(2, pair(4, y_loc_s2), (MoveDIR)move));
-    CHECK_THROWS(b.move(2, pair(3, y_loc_p2), (MoveDIR)move));//p2 should be dead now
-    CHECK_NOTHROW(b.move(1, pair(1, y_loc_pc1), (MoveDIR)move));
+    CHECK_NOTHROW(b.move(1, pair(1, y_loc_fc1), (Board::MoveDIR)move));//Always target adversary paramedic
+    CHECK_NOTHROW(b.move(2, pair(4, y_loc_s2), (Board::MoveDIR)move));
+    CHECK_THROWS(b.move(2, pair(3, y_loc_p2), (Board::MoveDIR)move));//p2 should be dead now
+    CHECK_NOTHROW(b.move(1, pair(1, y_loc_pc1), (Board::MoveDIR)move));
     CHECK(b.has_soldiers(2) == true);//Check p2 still has soldiers(s2)
 
     move = 5 - move;
@@ -263,9 +259,9 @@ TEST_CASE("Check ParamdedicCommander behavior"){
         CHECK(b.has_soldiers(2) == true);
         CHECK(b.has_soldiers(1) == true);
 
-        CHECK_NOTHROW(b.move(1, pair(1, y_loc_fc1), (MoveDIR)move));//Always target adversary paramedic
-        CHECK_NOTHROW(b.move(2, pair(4, y_loc_s2), (MoveDIR)move));
-        CHECK_NOTHROW(b.move(1, pair(1, y_loc_pc1), (MoveDIR)move));
+        CHECK_NOTHROW(b.move(1, pair(1, y_loc_fc1), (Board::MoveDIR)move));//Always target adversary paramedic
+        CHECK_NOTHROW(b.move(2, pair(4, y_loc_s2), (Board::MoveDIR)move));
+        CHECK_NOTHROW(b.move(1, pair(1, y_loc_pc1), (Board::MoveDIR)move));
 
         move = 5 - move;
         y_loc_fc1 = 1 - y_loc_fc1;
@@ -274,9 +270,9 @@ TEST_CASE("Check ParamdedicCommander behavior"){
     }
     CHECK(b.has_soldiers(2) == true);
     CHECK(b.has_soldiers(1) == true);
-    CHECK_NOTHROW(b.move(1, pair(1, y_loc_fc1), (MoveDIR)move));//Always target adversary paramedic
-    CHECK_THROWS(b.move(2, pair(4, y_loc_s2), (MoveDIR)move));//sniper2 should be dead now
-    CHECK_NOTHROW(b.move(1, pair(1, y_loc_pc1), (MoveDIR)move));
+    CHECK_NOTHROW(b.move(1, pair(1, y_loc_fc1), (Board::MoveDIR)move));//Always target adversary paramedic
+    CHECK_THROWS(b.move(2, pair(4, y_loc_s2), (Board::MoveDIR)move));//sniper2 should be dead now
+    CHECK_NOTHROW(b.move(1, pair(1, y_loc_pc1), (Board::MoveDIR)move));
 
     CHECK(b.has_soldiers(2) == false);//Player 1 should win
     CHECK(b.has_soldiers(1) == true);
