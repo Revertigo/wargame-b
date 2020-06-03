@@ -8,7 +8,9 @@ namespace WarGame {
 
     void Sniper::act(pair<int, int> src, vector<vector<Soldier *>> &board) {
         pair<int, int> target = find_strongest_enemy(src, board);
-        board[target.first][target.second]->damage(DMG, target, board);//damage the target player's soldier
+        if(!(target.first == -1 || target.second == -1)) {
+            board[target.first][target.second]->damage(DMG, target, board);//damage the target player's soldier
+        }
     }
 
     pair<int,int> Sniper::find_strongest_enemy(pair<int, int> src, vector<vector<Soldier*>> & board)
