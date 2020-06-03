@@ -7,7 +7,6 @@
 
 #include <exception>
 #include <utility>
-#include "MoveDIR.hpp"
 #include <vector>
 #include <string>
 #include <algorithm>
@@ -44,7 +43,7 @@ namespace WarGame {
 
     public:
         virtual ~Soldier(){}//We want to call delete of the correct object
-        void move(pair<int, int> src, MoveDIR dir, vector<vector<Soldier*>> & board);
+        void move(pair<int, int> src, vector<vector<Soldier*>> & board);
         int getPlayer() const {return _player;}
         int getHp() const {return _hp;}
         const string getName() const {return _name;}

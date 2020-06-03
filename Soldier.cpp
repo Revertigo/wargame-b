@@ -6,7 +6,7 @@
 
 namespace WarGame {
 
-    void Soldier::move(pair<int, int> src, MoveDIR dir, vector<vector<Soldier *>> &board) {
+    void Soldier::move(pair<int, int> src, vector<vector<Soldier *>> &board) {
         act(src, board);
     }
 
