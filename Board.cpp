@@ -74,7 +74,7 @@ namespace WarGame {
             }
 
         }
-        board[source.first][source.second] = nullptr;//set previous location to nullptr(mark as free)
+        board[source.first][source.second] = nullptr;//set previous location to nullptr(mark as free location)
 
         soldier->move(updated_source, direction, board);
     }

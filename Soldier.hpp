@@ -18,18 +18,13 @@ using namespace std;
 
 namespace WarGame {
     class Soldier{
-        double distance(int x1, int y1, int x2, int y2);
         const int _INITIAL_HP;
     protected:
-        //1 or 2
-        int _player;
+        int _player;//1 or 2
         int _hp;
         string _name;
 
         Soldier(int player, int hp, string name): _player(player), _hp(hp), _name(name), _INITIAL_HP(hp){};
-
-        pair<int,int> find_closest_enemy(pair<int, int> src, vector<vector<Soldier*>> & board);
-        pair<int,int> find_strongest_enemy(vector<vector<Soldier*>> & board);
 
         virtual void act(pair<int, int> src, vector<vector<Soldier*>> & board) = 0;
 
