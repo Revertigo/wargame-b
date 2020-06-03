@@ -6,6 +6,7 @@
 #define WARGAME_A_PARAMEDICCOMMANDER_HPP
 
 #include "Soldier.hpp"
+
 namespace WarGame {
     class ParamedicCommander: public Soldier {
         static const int HP = 200;

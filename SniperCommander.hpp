@@ -6,6 +6,7 @@
 #define WARGAME_A_SNIPERCOMMANDER_HPP
 
 #include "Soldier.hpp"
+
 namespace WarGame {
     class SniperCommander: public Soldier {
         static const int DMG = 100;

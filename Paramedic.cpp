@@ -10,8 +10,7 @@ namespace WarGame{
     {
         vector<vector<Soldier *>> helper_board(board.size() + 2, std::vector<Soldier*>(board[0].size() + 2, nullptr));
 
-        //Copy small board into bigger temp board
-
+        //Copy small board into bigger temporary board
         for(int i = 1; i < helper_board.size() - 1; i++)
         {
             for(int j = 1; j < helper_board[i].size() - 1; j++)

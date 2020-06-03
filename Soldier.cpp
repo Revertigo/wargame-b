@@ -1,7 +1,6 @@
 //
 // Created by osboxes on 5/30/20.
 //
-
 #include "Soldier.hpp"
 
 namespace WarGame {
