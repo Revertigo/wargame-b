@@ -127,8 +127,6 @@ TEST_CASE("Check SniperCommander behavior"){
     int y_loc_s2 = 3;
     //Player 1 should win after 2 moves with sniper
 
-    CHECK(b.has_soldiers(2) == true);
-    CHECK(b.has_soldiers(1) == true);
     CHECK_NOTHROW(b.move(1, pair(2, y_loc_s1), (MoveDIR)move));
     CHECK_NOTHROW(b.move(2, pair(3, y_loc_s2), (MoveDIR)move));
     move = 5 - move;
@@ -139,10 +137,11 @@ TEST_CASE("Check SniperCommander behavior"){
     CHECK_NOTHROW(b.move(1, pair(2, y_loc_s1), (MoveDIR)move));
     CHECK_THROWS(b.move(2, pair(3, y_loc_s2), (MoveDIR)move));//The SC2 should be dead
     CHECK_THROWS(b.move(2, pair(4, 4), (MoveDIR)move));//The FS should be dead
-    move = 5 - move;
+
     y_loc_s1 = 3 - y_loc_s1;
-    CHECK_NOTHROW(b.move(1, pair(2, y_loc_s1), (MoveDIR)move));//SC1 Should be alive
-    CHECK_NOTHROW(b.move(1, pair(1, 1), (MoveDIR)move));//S1 Should be alive
+    //Validate player 1 soldiers are still alive
+    CHECK(b[{2, y_loc_s1}] != nullptr);
+    CHECK(b[{1, 1}] != nullptr);
 
     CHECK(b.has_soldiers(2) == false);//Player 1 should win
     CHECK(b.has_soldiers(1) == true);
@@ -189,8 +188,8 @@ TEST_CASE("Check Paramdedic behavior"){
     CHECK(b.has_soldiers(2) == true);
     CHECK(b.has_soldiers(1) == true);
     CHECK_NOTHROW(b.move(1, pair(3, y_loc_f1), (MoveDIR)move));//Always target adversary paramedic
-    CHECK_NOTHROW(b.move(1, pair(2, y_loc_s1), (MoveDIR)move));
-    CHECK_NOTHROW(b.move(2, pair(3, y_loc_s2), (MoveDIR)move));
+    CHECK_NOTHROW(b.move(1, pair(1, y_loc_s1), (MoveDIR)move));
+    CHECK_NOTHROW(b.move(2, pair(4, y_loc_s2), (MoveDIR)move));
     CHECK_NOTHROW(b.move(1, pair(2, y_loc_p1), (MoveDIR)move));
     CHECK_THROWS(b.move(2, pair(3, y_loc_p2), (MoveDIR)move));//Check p2 is dead
     CHECK(b.has_soldiers(2) == true);//Check p2 still has soldiers(s2)
@@ -199,8 +198,8 @@ TEST_CASE("Check Paramdedic behavior"){
     y_loc_s1 = 1 - y_loc_s1;
     y_loc_s2 = 7 - y_loc_s2;
 
-    CHECK_NOTHROW(b.move(1, pair(2, y_loc_s1), (MoveDIR)move));//Should kill s2(he now has 50 HP)
-    CHECK_THROWS(b.move(2, pair(3, y_loc_s2), (MoveDIR)move));//Should be dead
+    CHECK_NOTHROW(b.move(1, pair(1, y_loc_s1), (MoveDIR)move));//Should kill s2(he now has 50 HP)
+    CHECK_THROWS(b.move(2, pair(4, y_loc_s2), (MoveDIR)move));//Should be dead
 
     CHECK(b.has_soldiers(2) == false);//Player 1 should win
     CHECK(b.has_soldiers(1) == true);
