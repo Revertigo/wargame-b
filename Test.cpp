@@ -60,7 +60,7 @@ TEST_CASE("Check FootCommander behavior"){
     for(int i = 0; i < BOARD_SIZE; i++)
     {
         //Move DOWN, then UP, then DOWN...
-        CHECK_NOTHROW(b.move(1, pair(x_loc_f1, 1), (Board::MoveDIR)move));//Moves FootSoldier
+        CHECK_NOTHROW(b.move(1, pair(x_loc_f1, 1), (Board::MoveDIR)move));//Moves FootCommander
         CHECK_NOTHROW(b.move(2, pair(x_loc_ft2, 2), (Board::MoveDIR)move));//Moves FootCommander
         move = 1 - move;
         x_loc_f1 = 1 - x_loc_f1;
