@@ -7,17 +7,16 @@
 
 #include "Soldier.hpp"
 
-namespace WarGame {
-    class ParamedicCommander: public Soldier {
-        static const int HP = 200;
+class ParamedicCommander: public WarGame::Soldier {
+    static const int HP = 200;
 
-    protected:
-        void act(pair<int, int> src, vector<vector<Soldier *>> &board) override;
+protected:
+    void act(pair<int, int> src, vector<vector<Soldier *>> &board) override;
 
-    public:
-        ParamedicCommander(int player) : Soldier(player, HP, "PC") {}
-    };
-}
+public:
+    ParamedicCommander(int player) : Soldier(player, HP, "PC") {}
+};
+
 
 
 #endif //WARGAME_A_PARAMEDICCOMMANDER_HPP

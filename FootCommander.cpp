@@ -4,9 +4,8 @@
 
 #include "FootCommander.hpp"
 
-namespace WarGame {
-    void FootCommander::act(pair<int, int> src, vector<vector<Soldier *>> &board) {
-        FootSoldier::act(src, board);//Calls father implementation
-        actuate_subordinates<FootSoldier>(board);
-    }
+
+void FootCommander::act(pair<int, int> src, vector<vector<Soldier *>> &board) {
+    FootSoldier::act(src, board);//Calls father implementation
+    actuate_subordinates<FootSoldier>(board);
 }

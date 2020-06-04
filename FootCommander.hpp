@@ -7,19 +7,18 @@
 
 #include "FootSoldier.hpp"
 
-namespace WarGame {
-    class FootCommander : public FootSoldier {
-        using FootSoldier::FootSoldier;
-        static const int DMG = 20;
-        static const int HP = 150;
+class FootCommander : public FootSoldier {
+    using FootSoldier::FootSoldier;
+    static const int DMG = 20;
+    static const int HP = 150;
 
-    protected:
-        void act(pair<int, int> src, vector<vector<Soldier *>> &board) override;
+protected:
+    void act(pair<int, int> src, vector<vector<Soldier *>> &board) override;
 
-    public:
-        FootCommander(int player): FootSoldier(player, HP, "FC", DMG){}
-    };
-}
+public:
+    FootCommander(int player): FootSoldier(player, HP, "FC", DMG){}
+};
+
 
 
 #endif //WARGAME_A_FOOTCOMMANDER_HPP
