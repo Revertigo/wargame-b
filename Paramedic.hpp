@@ -6,16 +6,16 @@
 #define WARGAME_A_PARAMEDIC_HPP
 
 #include "Soldier.hpp"
-#include "ParamedicCommander.hpp"
-
 
 class Paramedic : public WarGame::Soldier{
-    friend class ParamedicCommander;
+    using Soldier::Soldier;
     static const int HP = 100;
 
-    static void heal_teammates(pair<int, int> src, vector<vector<Soldier *>> &board);
+protected:
+    void heal_teammates(pair<int, int> src, vector<vector<Soldier *>> &board);
+
 public:
-    Paramedic(int player): Soldier(player, HP, "P "){}
+    Paramedic(int player): Soldier(player, HP, "P ", 0){}
     void act(pair<int, int> src, vector<vector<Soldier *>> &board) override;
 };
 

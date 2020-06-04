@@ -5,16 +5,16 @@
 #ifndef WARGAME_A_PARAMEDICCOMMANDER_HPP
 #define WARGAME_A_PARAMEDICCOMMANDER_HPP
 
-#include "Soldier.hpp"
+#include "Paramedic.hpp"
 
-class ParamedicCommander: public WarGame::Soldier {
+class ParamedicCommander: public Paramedic{
     static const int HP = 200;
 
 protected:
     void act(pair<int, int> src, vector<vector<Soldier *>> &board) override;
 
 public:
-    ParamedicCommander(int player) : Soldier(player, HP, "PC") {}
+    ParamedicCommander(int player) : Paramedic(player, HP, "PC", 0) {}
 };
 
 

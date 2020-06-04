@@ -4,8 +4,6 @@
 
 #include "Paramedic.hpp"
 
-
-
 void Paramedic::heal_teammates(pair<int, int> src, vector<vector<Soldier *>> &board)
 {
     vector<vector<Soldier *>> helper_board(board.size() + 2, std::vector<Soldier*>(board[0].size() + 2, nullptr));

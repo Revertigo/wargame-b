@@ -16,8 +16,9 @@ namespace WarGame {
         int _player;//1 or 2
         int _hp;
         string _name;
+        int _dmg;
 
-        Soldier(int player, int hp, string name): _player(player), _hp(hp), _name(name), _INITIAL_HP(hp){};
+        Soldier(int player, int hp, string name, int dmg): _player(player), _hp(hp), _name(name), _INITIAL_HP(hp), _dmg(dmg){};
 
         virtual void act(pair<int, int> src, vector<vector<Soldier*>> & board) = 0;
 

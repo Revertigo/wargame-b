@@ -5,9 +5,9 @@
 #ifndef WARGAME_A_SNIPERCOMMANDER_HPP
 #define WARGAME_A_SNIPERCOMMANDER_HPP
 
-#include "Soldier.hpp"
+#include "Sniper.hpp"
 
-class SniperCommander: public WarGame::Soldier {
+class SniperCommander: public Sniper {
     static const int DMG = 100;
     static const int HP = 120;
 
@@ -15,7 +15,7 @@ protected:
     void act(pair<int, int> src, vector<vector<Soldier *>> &board) override;
 
 public:
-    SniperCommander(int player): Soldier(player, HP, "SC"){}
+    SniperCommander(int player): Sniper(player, HP, "SC", DMG){}
 };
 
 
