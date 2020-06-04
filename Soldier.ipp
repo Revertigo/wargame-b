@@ -18,9 +18,11 @@ namespace WarGame {
 
         for (int i = 0; i < board.size(); i++) {
             for (int j = 0; j < board[i].size(); j++) {
+
                 T *subordinate = dynamic_cast<T *>(board[i][j]);
-                //Check it actually FootSoldier and they are on the same team
-                if (subordinate && subordinate->getPlayer() == _player) {
+                //Check it actually FootSoldier(Since FootCommander inherent FootSoldier, it can be converted to FootCommander at runtime)
+                // and they are on the same team
+                if (subordinate && typeid(*subordinate) == typeid(T) && subordinate->getPlayer() == _player) {
                     subordinate->act({i, j}, board);//Make him attack the enemy as well !
                 }
             }

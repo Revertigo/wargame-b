@@ -38,7 +38,7 @@ namespace WarGame {
     void FootSoldier::act(pair<int, int> src, vector<vector<Soldier*>> & board) {
         pair<int, int> target = find_closest_enemy(src, board);
         if(!(target.first == -1 || target.second == -1)) {
-            board[target.first][target.second]->damage(DMG, target, board);//damage the target player's soldier
+            board[target.first][target.second]->damage(_dmg, target, board);//damage the target player's soldier
         }
     }
 }

@@ -5,11 +5,11 @@
 #ifndef WARGAME_A_FOOTCOMMANDER_HPP
 #define WARGAME_A_FOOTCOMMANDER_HPP
 
-#include "Soldier.hpp"
+#include "FootSoldier.hpp"
 
 namespace WarGame {
-    class FootCommander : public Soldier {
-        using Soldier::Soldier;
+    class FootCommander : public FootSoldier {
+        using FootSoldier::FootSoldier;
         static const int DMG = 20;
         static const int HP = 150;
 
@@ -17,7 +17,7 @@ namespace WarGame {
         void act(pair<int, int> src, vector<vector<Soldier *>> &board) override;
 
     public:
-        FootCommander(int player): Soldier(player, HP, "FC"){}
+        FootCommander(int player): FootSoldier(player, HP, "FC", DMG){}
     };
 }
 
